@@ -1,0 +1,231 @@
+---
+title: "Final_Project"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+rich=read.table("./neuroc1.Rdata.txt", header=T, na.strings="NA")
+peder=read.table("./neuroc2.Rdata.txt", header=T, na.strings="NA")
+hwi=read.table("./neuroc3.Rdata.txt", header=T, na.strings="NA")
+test=rich
+rich$Derived=NULL
+rich$totPwr=NULL
+rich$class=NULL
+peder$Derived=NULL
+peder$totPwr=NULL
+peder$class=NULL
+hwi$Derived=NULL
+hwi$totPwr=NULL
+hwi$class=NULL
+rich.std=rich[,2:ncol(rich)]
+rich.std=as.data.frame(scale(rich[,2:ncol(rich)]))
+peder.std=peder[,2:ncol(peder)]
+peder.std=as.data.frame(scale(peder[,2:ncol(peder)]))
+hwi.std=hwi[,2:ncol(hwi)]
+hwi.std=as.data.frame(scale(hwi[,2:ncol(hwi)]))
+total=rbind(rich[,2:ncol(rich)], peder[,2:ncol(rich)],hwi[,2:ncol(rich)])
+total.std=total
+total.std=as.data.frame(scale(total))
+#base
+richBase=rich[5:54,]
+pederBase=peder[5:54,]
+hwiBase=hwi
+richBase.std=richBase
+richBase.std=as.data.frame(scale(richBase))
+pederBase.std=pederBase
+pederBase.std=as.data.frame(scale(pederBase))
+hwiBase.std=hwiBase
+hwiBase.std=as.data.frame(scale(hwiBase))
+#engaged
+richEngagedOne=rich[55:104,]
+richEngagedTwo=rich[105:154,]
+richEngagedThree=rich[155:204,]
+richEngagedLast=rich[164:213,]
+richEngagedOne.std=richEngagedOne
+richEngagedOne.std=as.data.frame(scale(richEngagedOne))
+richEngagedTwo.std=richEngagedTwo
+richEngagedTwo.std=as.data.frame(scale(richEngagedTwo))
+richEngagedThree.std=richEngagedThree
+richEngagedThree.std=as.data.frame(scale(richEngagedThree))
+richEngagedLast.std=richEngagedLast
+richEngagedLast.std=as.data.frame(scale(richEngagedLast))
+pederEngagedOne=peder[55:104,]
+pederEngagedTwo=peder[105:154,]
+pederEngagedThree=peder[155:204,]
+pederEngagedLast=peder[171:220,]
+pederEngagedOne.std=pederEngagedOne
+pederEngagedOne.std=as.data.frame(scale(pederEngagedOne))
+pederEngagedTwo.std=pederEngagedTwo
+pederEngagedTwo.std=as.data.frame(scale(pederEngagedTwo))
+pederEngagedThree.std=pederEngagedThree
+pederEngagedThree.std=as.data.frame(scale(pederEngagedThree))
+pederEngagedLast.std=pederEngagedLast
+pederEngagedLast.std=as.data.frame(scale(pederEngagedLast))
+hwiEngagedOne=hwi[55:104,]
+hwiEngagedTwo=hwi[105:154,]
+hwiEngagedThree=hwi[155:204,]
+hwiEngagedLast=hwi[164:213,]
+hwiEngagedOne.std=hwiEngagedOne
+hwiEngagedOne.std=as.data.frame(scale(hwiEngagedOne))
+hwiEngagedTwo.std=hwiEngagedTwo
+hwiEngagedTwo.std=as.data.frame(scale(hwiEngagedTwo))
+hwiEngagedThree.std=hwiEngagedThree
+hwiEngagedThree.std=as.data.frame(scale(hwiEngagedThree))
+hwiEngagedLast.std=hwiEngagedLast
+hwiEngagedLast.std=as.data.frame(scale(hwiEngagedLast))
+richEngagedTotal=rich[55:213,]
+richEngagedTotal.std=richEngagedTotal
+richEngagedTotal.std=as.data.frame(scale(richEngagedTotal))
+pederEngagedTotal=peder[55:213,]
+pederEngagedTotal.std=pederEngagedTotal
+pederEngagedTotal.std=as.data.frame(scale(pederEngagedTotal))
+hwiEngagedTotal=hwi[55:213,]
+hwiEngagedTotal.std=hwiEngagedTotal
+hwiEngagedTotal.std=as.data.frame(scale(hwiEngagedTotal))
+```
+```{r}
+#par(mar=c(,5,1,1))
+boxplot(richBase.std[,2:ncol(richBase.std)],las=2,main="Rich-Baseline Measurement", xlab="Rhythms",ylab="Standardized Data")
+boxplot(richEngagedOne.std[,2:ncol(richEngagedOne.std)],las=2,main="Rich-Engaged(0sec-50sec) Measurement: 50 samples", xlab="Rhythms",ylab="Standardized Data")
+boxplot(richEngagedTwo.std[,2:ncol(richEngagedTwo.std)],las=2,main="Rich-Engaged(51sec-100sec) Measurement: 50 samples", xlab="Rhythms",ylab="Standardized Data")
+boxplot(richEngagedThree.std[,2:ncol(richEngagedThree.std)],las=2,main="Rich-Engaged(101sec-150sec) Measurement: 50 samples", xlab="Rhythms",ylab="Standardized Data")
+boxplot(richEngagedLast.std[,2:ncol(richEngagedLast.std)],las=2,main="Rich-Engaged(110sec-159sec) Measurement: 50 samples", xlab="Rhythms",ylab="Standardized Data")
+boxplot(richBase[,10:ncol(richBase)],las=2,main="Rich-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richEngagedTotal[,10:ncol(richEngagedTotal)],las=2,main="Rich-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richBase[,3],las=2,main="Rich-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richEngagedTotal[,3],las=2,main="Rich-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richBase[,6:7],las=2,main="Rich-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richEngagedTotal[,6:7],las=2,main="Rich-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richBase[,7:9],las=2,main="Rich-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richEngagedTotal[,7:9],las=2,main="Rich-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+```
+```{r}
+boxplot(pederBase.std[,2:ncol(pederBase.std)],las=2, main="Peder-Baseline Measurement", xlab="Rhythms",ylab="Standardized Data")
+boxplot(pederEngagedOne.std[,2:ncol(pederEngagedOne.std)],las=2,main="Peder-Engaged(0sec-50sec) Measurement: 50 samples", xlab="Rhythms",ylab="Standardized Data")
+boxplot(pederEngagedTwo.std[,2:ncol(pederEngagedTwo.std)],las=2,main="Peder-Engaged(51sec-100sec) Measurement: 50 samples", xlab="Rhythms",ylab="Standardized Data")
+boxplot(pederEngagedThree.std[,2:ncol(pederEngagedThree.std)],las=2,main="Peder-Engaged(101sec-150sec) Measurement: 50 samples", xlab="Rhythms",ylab="Standardized Data")
+boxplot(pederEngagedLast.std[,2:ncol(pederEngagedLast.std)],las=2,main="Peder-Engaged(110sec-159sec) Measurement: 50 samples", xlab="Rhythms",ylab="Standardized Data")
+boxplot(pederEngagedLast.std[,2:ncol(pederEngagedTotal.std)],las=2,main="Peder-Engaged Measurement", xlab="Rhythms",ylab="Standardized Data")
+boxplot(pederBase[,10:ncol(pederBase)],las=2,main="Peder-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(pederEngagedTotal[,10:ncol(pederEngagedTotal)],las=2,main="Peder-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+```
+```{r}
+boxplot(hwiBase.std[,2:ncol(hwiBase.std)],las=2, main="Hwi-Baseline Measurement", xlab="Rhythms",ylab="Standardized Data")
+boxplot(hwiEngagedOne.std[,2:ncol(hwiEngagedOne.std)],las=2,main="Hwi-Engaged(0sec-50sec) Measurement: 50 samples", xlab="Rhythms",ylab="Standardized Data")
+boxplot(hwiEngagedTwo.std[,2:ncol(hwiEngagedTwo.std)],las=2,main="Hwi-Engaged(51sec-100sec) Measurement: 50 samples", xlab="Rhythms",ylab="Standardized Data")
+boxplot(hwiEngagedThree.std[,2:ncol(hwiEngagedThree.std)],las=2,main="Hwi-Engaged(101sec-150sec) Measurement: 50 samples", xlab="Rhythms",ylab="Standardized Data")
+boxplot(hwiEngagedLast.std[,2:ncol(hwiEngagedLast.std)],las=2,main="Hwi-Engaged(110sec-159sec) Measurement: 50 samples", xlab="Rhythms",ylab="Standardized Data")
+boxplot(hwiEngagedLast.std[,2:ncol(hwiEngagedLast.std)],las=2,main="Hwi-Engaged Measurement", xlab="Rhythms",ylab="Standardized Data")
+boxplot(hwiEngagedLast.std[,2:ncol(hwiEngagedLast.std)],las=2,main="Hwi-Engaged Measurement", xlab="Rhythms",ylab="Raw Data")
+boxplot(hwiBase[,10:ncol(hwiBase)],las=2,main="Hwi-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(hwiEngagedTotal[,10:ncol(hwiEngagedTotal)],las=2,main="Hwi-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+```
+```{r}
+rich.multivariate.attn = lm(Attention ~ Theta + Beta2, data = rich[,2:ncol(rich)])
+summary(rich.multivariate.attn)
+rich.multivariate.med = lm(Meditation ~ Theta + Alpha2, data = rich[,2:ncol(rich)])
+summary(rich.multivariate.med)
+```
+```{r}
+peder.multivariate.std.attn = lm(Attention ~ Theta + Beta2, data = peder[,2:ncol(peder)])
+summary(peder.multivariate.std.attn)
+peder.multivariate.std.med = lm(Meditation ~ Theta + Alpha2, data = peder[,2:ncol(peder)])
+summary(peder.multivariate.std.med)
+```
+```{r}
+hwi.multivariate.std.attn = lm(Attention ~ Theta + Beta2, data = hwi[,2:ncol(hwi)])
+summary(hwi.multivariate.std.attn)
+hwi.multivariate.std.med = lm(Meditation ~ Theta + Alpha2, data = hwi[,2:ncol(hwi)])
+summary(hwi.multivariate.std.med)
+```
+```{r}
+ggplotRegression <- function (fit) {
+require(ggplot2)
+ggplot(fit$model, aes_string(x = paste(names(fit$model)[2], names(fit$model)[3], sep="  + "), y = names(fit$model)[1])) + 
+  geom_point() +
+  stat_smooth(method = "lm", col = "red") +
+  labs(title = paste("Adj R2 = ",signif(summary(fit)$adj.r.squared, 5),
+                     "Intercept =",signif(fit$coef[[1]],5 ),
+                     " Slope =",signif(fit$coef[[2]], 5),
+                     " P =",signif(summary(fit)$coef[2,4], 5)))
+}
+ggplotRegressionsingle <- function (fit) {
+require(ggplot2)
+ggplot(fit$model, aes_string(x =names(fit$model)[2], y = names(fit$model)[1])) + 
+  geom_point() +
+  stat_smooth(method = "lm", col = "red") +
+  labs(title = paste("Adj R2 = ",signif(summary(fit)$adj.r.squared, 5),
+                     "Intercept =",signif(fit$coef[[1]],5 ),
+                     " Slope =",signif(fit$coef[[2]], 5),
+                     " P =",signif(summary(fit)$coef[2,4], 5)))
+}
+```
+```{r}
+ggplotRegression(rich.multivariate.attn)
+summary(rich.multivariate.attn)
+```
+```{r}
+ggplotRegression(rich.multivariate.med)
+summary(rich.multivariate.med)
+```
+
+```{r}
+boxplot(richBase[,10:ncol(richBase)],las=2,main="Rich-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richEngagedTotal[,10:ncol(richEngagedTotal)],las=2,main="Rich-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richBase[,3],main="Rich-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richEngagedTotal[,3],las=2,main="Rich-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richBase[,6:9],las=2,main="Rich-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richEngagedTotal[,6:9],las=2,main="Rich-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+
+boxplot(pederBase[,10:ncol(pederBase)],las=2,main="Peder-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(pederEngagedTotal[,10:ncol(pederEngagedTotal)],las=2,main="Peder-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(pederBase[,3],main="Peder-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(pederEngagedTotal[,3],las=2,main="Peder-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(pederBase[,6:9],las=2,main="Peder-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(pederEngagedTotal[,6:9],las=2,main="Peder-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+
+boxplot(hwiBase[,10:ncol(hwiBase)],las=2,main="Hwi-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(hwiEngagedTotal[,10:ncol(hwiEngagedTotal)],las=2,main="Hwi-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(hwiBase[,3],main="Hwi-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(hwiEngagedTotal[,3],las=2,main="Hwi-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(hwiBase[,6:9],las=2,main="Hwi-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(hwiEngagedTotal[,6:9],las=2,main="Hwi-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+```
+```{r}
+total.multivariate.med = lm(Meditation ~ Theta+Alpha2, data = total.std)
+summary(total.multivariate.med)
+total.multivariate.attn = lm(Attention ~ Theta, data = total.std)
+summary(total.multivariate.attn)
+ggplotRegression(rich.multivariate.attn)
+```
+```{r}
+par(mfrow=c(1,2))
+boxplot(richBase[3],las=2, main="Rich-Base Measurement", xlab="Rhythms",ylab="Measurement",show.names=TRUE)
+boxplot(richEngagedTotal[3],las=2,main="Rich-Engaged Measurement", xlab="Rhythms",ylab="Measurement",show.names=TRUE)
+boxplot(pederBase[3],main="Peder-Base Measurement", xlab="Rhythms",ylab="Measurement",show.names=TRUE)
+boxplot(pederEngagedTotal[3],las=2,main="Peder-Engaged Measurement", xlab="Rhythms",ylab="Measurement",show.names=TRUE)
+boxplot(hwiBase[3],main="Hwi-Base Measurement", xlab="Rhythms",ylab="Measurement",show.names=TRUE)
+boxplot(hwiEngagedTotal[3],las=2,main="Hwi-Engaged Measurement", xlab="Rhythms",ylab="Measurement",show.names=TRUE)
+
+
+```
+```{r}
+par(mfrow=c(1,2))
+par(mar = c(6.5, 6.5, 2, 2), mgp = c(5, 1, 0))
+boxplot(richBase[,6:9],las=2,main="Rich-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(richEngagedTotal[,6:9],las=2,main="Rich-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(pederBase[,6:9],las=2,main="Peder-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(pederEngagedTotal[,6:9],las=2,main="Peder-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(hwiBase[,6:9],las=2,main="Hwi-Base Measurement", xlab="Rhythms",ylab="Measurement")
+boxplot(hwiEngagedTotal[,6:9],las=2,main="Hwi-Engaged Measurement", xlab="Rhythms",ylab="Measurement")
+```
